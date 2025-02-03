@@ -536,22 +536,32 @@ document.head.appendChild(style);
 // Inicializa o chat quando a página carregar
 document.addEventListener('DOMContentLoaded', initializeChat);
 
-// Adicione após a criação do botão de treino
+// Atualiza a função de reorganização mobile
 function reorganizeButtonsForMobile() {
+    const inputArea = document.querySelector('.input-area');
+    const userInput = document.getElementById('userInput');
+    const sendButton = inputArea.querySelector('.send-btn');
+    const trainButton = inputArea.querySelector('.train-btn');
+    
     if (window.innerWidth <= 768) {
-        const inputArea = document.querySelector('.input-area');
-        const buttonGroup = document.createElement('div');
-        buttonGroup.className = 'button-group';
-        
-        // Move os botões para o novo container
-        const sendButton = inputArea.querySelector('.send-btn');
-        const trainButton = inputArea.querySelector('.train-btn');
-        
+        // Remove os botões existentes
         if (sendButton) inputArea.removeChild(sendButton);
         if (trainButton) inputArea.removeChild(trainButton);
         
+        // Cria o grupo de botões
+        let buttonGroup = inputArea.querySelector('.button-group');
+        if (!buttonGroup) {
+            buttonGroup = document.createElement('div');
+            buttonGroup.className = 'button-group';
+        }
+        
+        // Adiciona os botões ao grupo
         buttonGroup.appendChild(sendButton);
         buttonGroup.appendChild(trainButton);
+        
+        // Garante que o input esteja primeiro
+        inputArea.insertBefore(userInput, inputArea.firstChild);
+        // Adiciona o grupo de botões depois do input
         inputArea.appendChild(buttonGroup);
     }
 } 

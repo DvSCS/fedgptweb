@@ -392,59 +392,113 @@ textarea:focus {
 @media (max-width: 768px) {
     .container {
         padding: 1rem;
-    }
-
-    header h1 {
-        font-size: 2.5rem;
-    }
-
-    header p {
-        font-size: 0.9rem;
-        padding: 0.5rem;
-    }
-
-    .options {
-        flex-direction: column;
-        padding: 0 1rem;
-    }
-
-    .option-btn {
-        width: 100%;
-        padding: 1.2rem;
-    }
-
-    .chat-container {
-        padding: 1.2rem;
-        margin-top: 1.5rem;
-    }
-
-    .input-area {
+        height: 100vh;
+        display: flex;
         flex-direction: column;
     }
 
-    .send-btn {
-        width: 100%;
-        height: auto;
-        padding: 1rem;
-    }
-
-    textarea {
-        font-size: 0.9rem;
-        padding: 1rem;
-    }
-
-    .chat-messages {
-        min-height: 200px;
-        max-height: 300px;
+    header {
+        margin-bottom: 1rem;
     }
 
     .logo {
         width: 40px;
         height: 40px;
     }
-    
-    .logo-container {
-        gap: 0.8rem;
+
+    .options {
+        margin-bottom: 1rem;
+    }
+
+    .option-btn {
+        padding: 0.8rem;
+        font-size: 0.9rem;
+    }
+
+    .chat-container {
+        flex: 1;
+        margin-bottom: 0;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .chat-messages {
+        flex: 1;
+        max-height: calc(100vh - 280px);
+        margin-bottom: 1rem;
+    }
+
+    .input-area {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: var(--dark-bg);
+        padding: 1rem;
+        border-top: 1px solid var(--glass-border);
+        z-index: 100;
+    }
+
+    #userInput {
+        min-height: 80px;
+        font-size: 1rem;
+        padding: 1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .send-btn, .train-btn {
+        height: 50px;
+        font-size: 1rem;
+        padding: 0 2rem;
+    }
+
+    /* Ajustes para o modal de duração em mobile */
+    .duration-modal {
+        width: 90%;
+        max-width: none;
+        padding: 1.5rem;
+        bottom: 20px;
+    }
+
+    .duration-slider {
+        height: 8px;
+    }
+
+    .duration-slider::-webkit-slider-thumb {
+        width: 24px;
+        height: 24px;
+    }
+
+    .duration-value {
+        font-size: 1.4rem;
+    }
+
+    .duration-buttons {
+        margin-top: 1.5rem;
+    }
+
+    .duration-btn {
+        padding: 1rem 2rem;
+        font-size: 1.1rem;
+        width: 45%;
+    }
+}
+
+/* Ajustes para telas muito pequenas */
+@media (max-width: 360px) {
+    .input-area {
+        padding: 0.8rem;
+    }
+
+    #userInput {
+        min-height: 70px;
+        font-size: 0.95rem;
+    }
+
+    .send-btn, .train-btn {
+        height: 45px;
+        font-size: 0.9rem;
+        padding: 0 1.5rem;
     }
 }
 

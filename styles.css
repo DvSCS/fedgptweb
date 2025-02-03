@@ -1,0 +1,640 @@
+:root {
+    --primary-color: #00FF66;
+    --secondary-color: #00CC44;
+    --accent-color: #00FF95;
+    --dark-bg: #050505;
+    --light-text: #ffffff;
+    --card-bg: #0D0D0D;
+    --success-glow: 0 0 20px rgba(0, 255, 102, 0.3);
+    --gradient-primary: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    --glass-border: rgba(0, 255, 102, 0.2);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', system-ui, sans-serif;
+}
+
+body {
+    background: radial-gradient(circle at top right, #0A0A0A, #050505);
+    color: var(--light-text);
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Efeito de partículas no background */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 50% 50%, rgba(0, 255, 102, 0.1) 0%, transparent 10%),
+        radial-gradient(circle at 80% 20%, rgba(0, 255, 102, 0.05) 0%, transparent 15%);
+    pointer-events: none;
+    opacity: 0.6;
+    animation: backgroundShift 15s ease-in-out infinite;
+}
+
+@keyframes backgroundShift {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+/* Adicione após o body::before existente */
+body::after {
+    content: '';
+    position: fixed;
+    top: 50%;
+    right: -150px;
+    width: 400px;
+    height: 400px;
+    background-image: url('https://oronaldotavares.com.br/wp-content/uploads/2025/01/Sem-Tituloxsaxsac-3-1024x694.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.1;
+    transform: translateY(-50%);
+    pointer-events: none;
+    animation: floatBackground 20s ease-in-out infinite;
+    filter: hue-rotate(45deg) brightness(1.5);
+    z-index: -1;
+}
+
+/* Adicione uma versão espelhada à esquerda */
+.container::before {
+    content: '';
+    position: fixed;
+    top: 50%;
+    left: -150px;
+    width: 400px;
+    height: 400px;
+    background-image: url('https://oronaldotavares.com.br/wp-content/uploads/2025/01/Sem-Tituloxsaxsac-3-1024x694.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.1;
+    transform: translateY(-50%) scaleX(-1);
+    pointer-events: none;
+    animation: floatBackground 20s ease-in-out infinite reverse;
+    filter: hue-rotate(-45deg) brightness(1.5);
+    z-index: -1;
+}
+
+@keyframes floatBackground {
+    0%, 100% {
+        transform: translateY(-50%) rotate(0deg);
+    }
+    25% {
+        transform: translateY(-55%) rotate(2deg);
+    }
+    75% {
+        transform: translateY(-45%) rotate(-2deg);
+    }
+}
+
+/* Ajuste na media query para esconder em telas menores */
+@media (max-width: 1400px) {
+    body::after,
+    .container::before {
+        display: none;
+    }
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem;
+    position: relative;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 3rem;
+    animation: fadeInDown 0.8s ease-out;
+    position: relative;
+}
+
+header::after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 150px;
+    height: 3px;
+    background: var(--gradient-primary);
+    border-radius: 3px;
+}
+
+header h1 {
+    font-size: 3.5rem;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: var(--success-glow);
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin: 0;
+}
+
+header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.6;
+    background: rgba(0, 255, 102, 0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    display: inline-block;
+}
+
+.options {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+    animation: fadeInUp 0.8s ease-out 0.2s backwards;
+}
+
+.option-btn {
+    padding: 1rem 2.5rem;
+    border: none;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    position: relative;
+}
+
+.option-btn.biblical {
+    background: var(--gradient-primary);
+    color: var(--dark-bg);
+    box-shadow: var(--success-glow);
+    position: relative;
+    overflow: hidden;
+}
+
+.option-btn.biblical::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transform: translateX(-100%);
+    transition: 0.5s;
+}
+
+.option-btn.biblical:hover::after {
+    transform: translateX(100%);
+}
+
+.option-btn.stories {
+    background-color: transparent;
+    border: 2px solid var(--glass-border);
+    color: var(--primary-color);
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.option-btn.stories::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: var(--gradient-primary);
+    transition: 0.5s;
+    z-index: -1;
+}
+
+.option-btn.stories:hover {
+    color: var(--dark-bg);
+}
+
+.option-btn.stories:hover::before {
+    width: 100%;
+}
+
+.option-btn:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 30px rgba(0, 255, 102, 0.4);
+}
+
+.chat-container {
+    background: rgba(13, 13, 13, 0.8);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    padding: 2rem;
+    margin-top: 2rem;
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px rgba(0, 255, 102, 0.1);
+    animation: fadeIn 1s ease-out 0.4s backwards;
+    position: relative;
+}
+
+.chat-container::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    padding: 2px;
+    background: var(--gradient-primary);
+    -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+    mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* Reduzindo o tamanho da área de mensagens */
+.chat-messages {
+    min-height: 250px; /* Reduzido de 400px */
+    max-height: 350px; /* Reduzido de 600px */
+    overflow-y: auto;
+    margin-bottom: 1.5rem;
+    padding: 1.2rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    border: 1px solid var(--glass-border);
+}
+
+.chat-messages::-webkit-scrollbar {
+    width: 4px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 2px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+    background: var(--gradient-primary);
+    border-radius: 2px;
+}
+
+.input-area {
+    display: flex;
+    gap: 1rem;
+    position: relative;
+    align-items: flex-start;
+}
+
+textarea {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 1.2rem;
+    color: var(--light-text);
+    font-size: 1rem;
+    min-height: 100px;
+    max-height: 150px;
+    resize: none;
+    transition: all 0.3s ease;
+    line-height: 1.5;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 20px rgba(0, 255, 102, 0.15);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.send-btn {
+    background: var(--gradient-primary);
+    color: var(--dark-bg);
+    border: none;
+    border-radius: 12px;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.send-btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transform: translateX(-100%);
+    transition: 0.5s;
+}
+
+.send-btn:hover::after {
+    transform: translateX(100%);
+}
+
+.send-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 255, 102, 0.3);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    header h1 {
+        font-size: 2.5rem;
+    }
+
+    header p {
+        font-size: 0.9rem;
+        padding: 0.5rem;
+    }
+
+    .options {
+        flex-direction: column;
+        padding: 0 1rem;
+    }
+
+    .option-btn {
+        width: 100%;
+        padding: 1.2rem;
+    }
+
+    .chat-container {
+        padding: 1.2rem;
+        margin-top: 1.5rem;
+    }
+
+    .input-area {
+        flex-direction: column;
+    }
+
+    .send-btn {
+        width: 100%;
+        height: auto;
+        padding: 1rem;
+    }
+
+    textarea {
+        font-size: 0.9rem;
+        padding: 1rem;
+    }
+
+    .chat-messages {
+        min-height: 200px;
+        max-height: 300px;
+    }
+
+    .logo {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .logo-container {
+        gap: 0.8rem;
+    }
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.logo {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 10px rgba(0, 255, 102, 0.3));
+    animation: floatAnimation 3s ease-in-out infinite;
+}
+
+@keyframes floatAnimation {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.message {
+    padding: 1rem;
+    margin: 0.5rem 0;
+    border-radius: 12px;
+    max-width: 85%;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.message.user {
+    background: var(--gradient-primary);
+    color: var(--dark-bg);
+    margin-left: auto;
+}
+
+.message.assistant {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--light-text);
+    margin-right: auto;
+}
+
+.loading-dots {
+    display: flex;
+    gap: 0.3rem;
+    justify-content: center;
+}
+
+.loading-dots span {
+    width: 8px;
+    height: 8px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    animation: loadingDots 1.4s infinite ease-in-out;
+}
+
+.loading-dots span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.loading-dots span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes loadingDots {
+    0%, 100% {
+        transform: scale(0.3);
+        opacity: 0.3;
+    }
+    50% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Adicione ao seu CSS existente */
+.duration-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.duration-content {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 400px;
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px rgba(0, 255, 102, 0.1);
+}
+
+.duration-content h3 {
+    color: var(--light-text);
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.duration-slider-container {
+    margin-bottom: 2rem;
+}
+
+.duration-slider {
+    width: 100%;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    outline: none;
+    -webkit-appearance: none;
+    margin: 1rem 0;
+}
+
+.duration-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.duration-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+    box-shadow: var(--success-glow);
+}
+
+.duration-value {
+    text-align: center;
+    color: var(--light-text);
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.duration-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.duration-btn {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.duration-btn.confirm {
+    background: var(--primary-color);
+    color: var(--dark-bg);
+}
+
+.duration-btn.cancel {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--light-text);
+}
+
+.duration-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--success-glow);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Atualiza os estilos do modal de duração */
+.duration-hint {
+    font-size: 0.9rem;
+    opacity: 0.7;
+    margin-top: 0.5rem;
+} 

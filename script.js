@@ -486,6 +486,9 @@ document.addEventListener('DOMContentLoaded', () => {
             handleTraining();
         }
     });
+
+    reorganizeButtonsForMobile();
+    window.addEventListener('resize', reorganizeButtonsForMobile);
 });
 
 // Atualiza o CSS do botão
@@ -531,4 +534,24 @@ style.textContent = `
 document.head.appendChild(style);
 
 // Inicializa o chat quando a página carregar
-document.addEventListener('DOMContentLoaded', initializeChat); 
+document.addEventListener('DOMContentLoaded', initializeChat);
+
+// Adicione após a criação do botão de treino
+function reorganizeButtonsForMobile() {
+    if (window.innerWidth <= 768) {
+        const inputArea = document.querySelector('.input-area');
+        const buttonGroup = document.createElement('div');
+        buttonGroup.className = 'button-group';
+        
+        // Move os botões para o novo container
+        const sendButton = inputArea.querySelector('.send-btn');
+        const trainButton = inputArea.querySelector('.train-btn');
+        
+        if (sendButton) inputArea.removeChild(sendButton);
+        if (trainButton) inputArea.removeChild(trainButton);
+        
+        buttonGroup.appendChild(sendButton);
+        buttonGroup.appendChild(trainButton);
+        inputArea.appendChild(buttonGroup);
+    }
+} 
